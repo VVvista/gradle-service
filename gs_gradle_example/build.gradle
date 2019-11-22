@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'com.gsgradle.service'
+version '1.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()//导入Gradle的api，要写插件，肯定要使用Gradle的api
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+/*
+task processTemplates(type: ProcessTemplates) {
+    templateEngineType TemplateEngineType.Velocity
+    templateData  TemplateData(name:'1',variables: [:])
+    sourceFiles files('src1')
+    outputDir file('dst')
+}*/
