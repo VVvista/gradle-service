@@ -1,0 +1,5 @@
+task versionTask{
+    doLast{
+        println "versionTask:${major}"
+    }
+}

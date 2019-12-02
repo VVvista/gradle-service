@@ -23,8 +23,7 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: "io.spring.dependency-management"
-
-
+    
     sourceCompatibility = 1.8
 
     tasks.withType(JavaCompile) {
@@ -45,15 +44,11 @@ subprojects {
         compile 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RELEASE'
     }
 }
-task task1(dependsOn: ':gs_gradle_example:task1') {
+task task1(dependsOn: ':gradle-example:task1') {
     doLast {
         println "group:${projectGroup}"
         println "version:${projectVersion}"
 
     }
-}
-
-configurations {
-
 }
 

@@ -1,0 +1,42 @@
+
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'scala'
+}
+sourceCompatibility = 1.8
+setDescription("this is a gs_gradle_example!")
+println project.description
+group 'com.gsgradle.service'
+version '1.1-SNAPSHOT'
+// jar的main入口
+jar{
+/*    main{
+        attributes 'Main-Class':'com.gsgradle.example.todoitem.ToDoApp'
+    }*/
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:3.0.0-rc-1'
+    compile 'org.scala-lang:scala-library:2.11.12'
+    compile gradleApi()//导入Gradle的api，要写插件，肯定要使用Gradle的api
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+/*
+task processTemplates(type: ProcessTemplates) {
+    templateEngineType TemplateEngineType.Velocity
+    templateData  TemplateData(name:'1',variables: [:])
+    sourceFiles files('src1')
+    outputDir file('dst')
+}*/
+apply from: 'sub/moretask.gradle'
+println rootProject.ext.someOtherProp
+ apply plugin : ProjectVersion
+
+
+

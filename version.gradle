@@ -1,4 +1,4 @@
 ext {
-    projectGroup = 'com.gsgradle.service'
+    projectGroup = 'com.gradle.service'
     projectVersion = '1.0-SNAPSHOT'
 }

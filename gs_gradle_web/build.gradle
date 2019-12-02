@@ -1,7 +1,0 @@
-plugins {
-    id 'war'
-}
-
-dependencies {
-    compile project(":gs_gradle_core")
-}
