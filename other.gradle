@@ -1,5 +1,0 @@
-ext {
-    group = 'com.gsgradle.service'
-    version = '1.0-SNAPSHOT'
-    a='a'
-}

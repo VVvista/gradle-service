@@ -1,0 +1,11 @@
+apply plugin: CustomPluginInBuildGradle
+class CustomPluginInBuildGradle implements Plugin<Project> {
+    @Override
+    void apply(Project target) {
+        target.task('showCustomPluginInBuildGradle') {
+            doLast {
+                println("task in CustomPluginInBuildGradle") }
+        }
+    }
+}
+

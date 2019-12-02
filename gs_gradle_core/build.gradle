@@ -1,21 +1,82 @@
-apply plugin :'maven-publish'
-apply plugin :'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'maven'
+apply plugin: 'distribution'
 
 dependencies {
     compile project(":gs_gradle_model")
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
-// 上传source
-/*task sourcesJar(type: Jar) {
+task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
-    classifier = 'sources'
+    classifier 'sources'
 }
 
-task javadocJar(type: Jar) {
+task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc
-    classifier = 'javadoc'
+    classifier 'javadoc'
 }
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+ext {
+    baseUrl = "http://locahost:8081/artifactory"
+    snapshotUrl = "$baseUrl/libs-snapshot-local"
+    releaseUrl = "$baseUrl/libs-release-local"
+}
+
 publishing {
+    publications {
+        plugins(MavenPublication) {
+            from components.java
+            //  artifactId 'cloudbees-plugin'
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+    repositories {
+        maven {
+            name 'remoteArtifactory' //maven仓库可选名称
+            url project.version.endsWith('-SNAOSHOT') ? snapshotUrl : releaseUrl
+            credentials{
+                username="artifactoryusername"
+                password="artifactoryPassword"
+            }
+        }
+    }
+}
+
+distributions {
+    main {
+    }
+    docs {
+        contents {
+            from(libsDir) {
+                include sourcesJar.archiveName
+                include javadocJar.archiveName
+            }
+        }
+    }
+}
+/*// 上传source
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier  'sources'
+}
+
+task javadocJar(type: Jar,dependsOn:javadoc) {
+    from javadoc
+    classifier  'javadoc'
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}*/
+//assemble.dependsOn sourcesJar,javadocJar
+/*publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId = "$project.group"
@@ -36,7 +97,8 @@ publishing {
             }
         }
     }
-}*//*
+}*/
+/*
 publishing {
     publications {
 *//*        maven(MavenPublication) {
@@ -81,17 +143,17 @@ publishing {
 publishing {//发布jar到本地仓库
     publications {
         maven(MavenPublication) {
-           groupId group
-           artifactId archivesBaseName
+            groupId group
+            artifactId archivesBaseName
             version version
             groupId project.group
             artifactId project.name
             version project.version
             //如果是war包填写components.web，如果是jar包填写components.java
             from components.java
-           repositories {//发布到指定的repository
-               maven {
-                   // change to point to your repo, e.g. http://my.org/repo
+            repositories {//发布到指定的repository
+                maven {
+                    // change to point to your repo, e.g. http://my.org/repo
                     url "/Users/vista/data/apache-maven-3.6.2/repository/"
                 }
             }

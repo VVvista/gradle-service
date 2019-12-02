@@ -9,13 +9,13 @@ import org.gradle.api.tasks.*;
  * @author Wen TingTing by 2019/11/15
  */
 public class ProcessTemplates extends DefaultTask{
-    private TemplateEngineType templateEngine;
+    private com.gsgradle.example.uptodate.TemplateEngineType templateEngine;
     private FileCollection sourceFiles;
-    private TemplateData templateData;
+    private com.gsgradle.example.uptodate.TemplateData templateData;
     private File outputDir;
 
     @Input
-    public TemplateEngineType getTemplateEngine() {
+    public com.gsgradle.example.uptodate.TemplateEngineType getTemplateEngine() {
         return this.templateEngine;
     }
 
@@ -25,7 +25,7 @@ public class ProcessTemplates extends DefaultTask{
     }
 
     @Nested
-    public TemplateData getTemplateData() {
+    public com.gsgradle.example.uptodate.TemplateData getTemplateData() {
         return this.templateData;
     }
 

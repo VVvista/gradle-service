@@ -1,3 +1,5 @@
+apply from: 'version.gradle'
+
 buildscript {
 
     ext {
@@ -14,8 +16,8 @@ buildscript {
 }
 
 allprojects {
-    group 'com.gsgradle.service'
-    version '1.1-SNAPSHOT'
+    group "$projectGroup"
+    version "$projectVersion"
 }
 
 subprojects {
@@ -43,52 +45,15 @@ subprojects {
         compile 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RELEASE'
     }
 }
-apply from: 'other.gradle'
-task task1 {
+task task1(dependsOn: ':gs_gradle_example:task1') {
     doLast {
-        println rootProject.ext.a
-        println rootProject.ext.group
-        println "group:${group}"
-        println "version:${version}"
+        println "group:${projectGroup}"
+        println "version:${projectVersion}"
 
     }
 }
 
-//mainClassName = ':gs_gradle_core.HelloWorld'
+configurations {
 
-// 配置任务过程参数调用
-task taskConfig {
-    println 'taskConfig configuration'
-    doLast {
-        println 'taskConfig execute doLast'
-    }
-    doFirst {
-        println 'taskConfig execute doFirst'
-    }
 }
 
-gradle.afterProject {
-    println '配置阶段 afterProject'
-}
-project.beforeEvaluate {
-    println '配置阶段 beforeEvaluate'
-}
-gradle.projectsEvaluated {
-    println '配置阶段 projectsEvaluated'
-}
-project.afterEvaluate {
-    println '配置阶段 afterEvaluate'
-}
-gradle.taskGraph.whenReady {
-    println '配置任务 whenReady'
-}
-// 执行阶段
-gradle.taskGraph.beforeTask {
-    println "执行阶段 before task"
-}
-gradle.taskGraph.afterTask {
-    println "执行阶段 afterTask "
-}
-gradle.buildFinished {
-    println '构建结束 buildFinished'
-}

@@ -1,9 +1,61 @@
+
 plugins {
     id 'java'
+    id 'groovy'
+    id 'scala'
 }
 
+/*task versionTask(type:ProjectVersion){
+    println "versionTask!!"
+}*/
+
+// description "this is a gs_gradle_example"
+setDescription("this is a gs_gradle_example!")
+println project.description
 group 'com.gsgradle.service'
 version '1.1-SNAPSHOT'
+// jar的main入口
+jar{
+/*    main{
+        attributes 'Main-Class':'com.gsgradle.example.todoitem.ToDoApp'
+    }*/
+}
+
+
+// 改变项目默认结构
+/*sourceSets{
+    main{
+        resources{
+            srcDirs=['src/resource/dev']
+        }
+        java{
+            srcDirs=['src']
+        }
+    }
+    test{
+        resources{
+            srcDirs=['src/resource/test']
+        }
+        java{
+            srcDirs=['test']
+        }
+    }
+}*/
+// 改变项目默认结构
+/*sourceSets{
+    main{
+        groovy{
+            srcDirs=['src']
+        }
+    }
+    test{
+        groovy{
+            srcDirs=['test']
+        }
+    }
+}*/
+//将构建结果放在out目录下，而不是build目录下
+//buildDir='out'
 
 sourceCompatibility = 1.8
 
@@ -12,6 +64,8 @@ repositories {
 }
 
 dependencies {
+    compile 'org.codehaus.groovy:groovy-all:3.0.0-rc-1'
+    compile 'org.scala-lang:scala-library:2.11.12'
     compile gradleApi()//导入Gradle的api，要写插件，肯定要使用Gradle的api
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
@@ -23,3 +77,68 @@ task processTemplates(type: ProcessTemplates) {
     sourceFiles files('src1')
     outputDir file('dst')
 }*/
+apply from: 'sub/moretask.gradle'
+println rootProject.ext.someOtherProp
+
+task tasklast  {
+    println "hello"
+}
+
+ext {
+    myprop = "a"
+}
+/*assert project.myprop == "a"
+assert project.ext.myprop == "a"
+project.myprop = "b"
+assert project.myprop == "b"
+assert project.ext.myprop == "b"*/
+println project.myprop
+
+project.ext.set("foo", "bar")
+project.ext.foo = "bar"
+project.ext["foo"] = "bar"
+
+// Once the property has been created via the extension, it can be changed by the owner.
+/*project.foo = "bar"
+project["foo"] = "bar"*/
+//project.ext.myp = "b"
+ext.myp = "bb"
+println myp
+
+
+/*task printVersion {
+    group="versioning"
+    description="println project version"
+    doLast {
+        logger.quiet "version:$version"
+    }
+}
+printVersion.doFirst{ println "First action!"}
+printVersion.doLast{println "last action !!"}*/
+task first{ println "first"}
+task second{println "second"}
+
+first.finalizedBy second
+/*
+task printVersion{
+        logger.quiet "version:$version"
+
+}
+printVersion.dependsOn second
+printVersion.dependsOn first
+task third{println "third"}
+third.dependsOn printVersion*/
+
+
+task task1 {
+    doLast {
+        println "group:${projectGroup}"
+        println "version:${projectVersion}"
+
+    }
+}
+
+ apply plugin : ProjectVersion
+
+
+
