@@ -12,10 +12,10 @@
   +--- Project ':gradle-example'  
   +--- Project ':gradle-model'  
   +--- Project ':gradle-core'  
-        \--- Project ':gradle-model'  
+ &nbsp;&nbsp;\--- Project ':gradle-model'  
   +--- Project ':gradle-web'  
-        \--- Project ':gradle-core'  
-            \--- Project ':gradle-model'  
+&nbsp;&nbsp;\--- Project ':gradle-core'  
+&nbsp;&nbsp;&nbsp;\--- Project ':gradle-model'  
 1. gradle-example主要记录了几个示例
 2. gradle-model/gradle-core为java项目
 3. gradle-web为java+web项目
