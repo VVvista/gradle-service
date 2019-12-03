@@ -7,6 +7,7 @@
     * groovy 3.0.0
 ##### 目录说明
 * gradle-seriver为父项目，项目结构如下：
+
     Root project 'gs_gradle_service'
   +--- Project ':gradle-example'
   +--- Project ':gradle-model'
