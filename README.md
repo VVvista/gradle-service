@@ -8,14 +8,14 @@
 ##### 目录说明
 * gradle-seriver为父项目，项目结构如下：
 
-    Root project 'gs_gradle_service'
-  +--- Project ':gradle-example'
-  +--- Project ':gradle-model'
-  +--- Project ':gradle-core'
-        \--- Project ':gradle-model'
-  +--- Project ':gradle-web'
-        \--- Project ':gradle-core'
-            \--- Project ':gradle-model'
+    Root project 'gs_gradle_service'  
+  +--- Project ':gradle-example'  
+  +--- Project ':gradle-model'  
+  +--- Project ':gradle-core'  
+        \--- Project ':gradle-model'  
+  +--- Project ':gradle-web'  
+        \--- Project ':gradle-core'  
+            \--- Project ':gradle-model'  
 1. gradle-example主要记录了几个示例
 2. gradle-model/gradle-core为java项目
 3. gradle-web为java+web项目
